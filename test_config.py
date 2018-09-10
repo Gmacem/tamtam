@@ -12,15 +12,3 @@ def now():
 
 
 now = now()
-
-
-def setup():
-    import os
-    # module = os.path.split(os.path.dirname(__file__))[0]#[-1]
-#     # print(module)
-#     # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{}.settings".format(module))
-#     import sys
-#     sys.path.append(module)
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "main.settings")
-    import django
-    django.setup()
