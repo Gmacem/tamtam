@@ -260,10 +260,10 @@ class TamTam:
     def get_flat_chats(self):
         """Простой список
         :return json
-        {'chat:123467890ABCD': 'Test chat 2018-07-22 23',
-         'chat:23467890ABCDE': 'Test2',
-         'chat:123456789': '',
-         'chat:Ddcd6A41de': ''}
+        {-12346789: 'Test chat 2018-07-22 23',
+         -23467890: 'Test2',
+         123456789: '',
+         132133223: ''}
         """
         json = self.get_chats_all()
         return get_result(json_data=json, key_key='chat_id', key_value='title')
