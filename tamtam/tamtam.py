@@ -14,6 +14,7 @@ class TamTam:
     место куда отправляются файлики:
     https://fu.mycdn.me/
 
+    Если вы решили запустить тесты, то создайте файлик test_config.py определив в нём следующие переменные и их значения
     >>> from test_config import token, test_chat_id, test_user_id, self_user_id, now
     >>> token != ''
     True
