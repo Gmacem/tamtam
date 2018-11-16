@@ -55,7 +55,7 @@ class TamTam:
                 raise MessageNotSendException(z)
         return z
 
-    def _get(self, url, params=None, json=True):
+    def _get(self, url: str, params=None, json=True):
         if not params:
             params = {}
         params['access_token'] = self._token
@@ -67,7 +67,7 @@ class TamTam:
             z = rr.content.decode('utf-8')
         return z
 
-    def send(self, chat_id, text):
+    def send(self, chat_id: int, text: str):
         """send message into chat  полетело сообщение в заданный чат
         :param chat_id:
         :param text:
@@ -83,7 +83,7 @@ class TamTam:
         }
         return self._post_messages(data=data)
 
-    def send_img(self, chat_id, url):
+    def send_img(self, chat_id: int, url: str):
         """
         Отравляем картинку
         :param chat_id:
@@ -120,7 +120,7 @@ class TamTam:
 
     ATTACH_TYPE = ['PHOTO', 'VIDEO', 'AUDIO', 'FILE']
 
-    def send_file(self, chat_id, file_name, file_data, attach_type='FILE', text=None):
+    def send_file(self, chat_id: int, file_name: str, file_data, attach_type='FILE', text=None):
         """
         1 Получить URL на загрузку аттача отправв POST запрос в формате JSON
         на https://botapi.tamtam.chat/me/upload?access_token=TOKEN&type=ATTACH_TYPE
@@ -166,7 +166,7 @@ class TamTam:
                               json=payload)
         return send
 
-    def send_pers(self, user_id, text):
+    def send_pers(self, user_id: int, text: str):
         """
         отправка персонального сообщения пользователю чата
         :param text:
@@ -183,7 +183,7 @@ class TamTam:
         }
         return self._post_messages(data=data)
 
-    def mark_seen(self, chat_id):
+    def mark_seen(self, chat_id: int):
         """
         Все соообщения прочитаны
         :param chat_id: 
@@ -268,7 +268,7 @@ class TamTam:
         json = self.get_chats_all()
         return get_result(json_data=json, key_key='chat_id', key_value='title')
 
-    def get_chat(self, chat_id):
+    def get_chat(self, chat_id: int):
         """информация только об одном чате
         https://apiok.ru/dev/graph_api/methods/graph.user/graph.user.chat/get
         :return:json
@@ -294,7 +294,7 @@ class TamTam:
     #     """
     #     return self.get(url=str(chat_id)+'/url')
 
-    def rename_chat(self, chat_id, name):
+    def rename_chat(self, chat_id: int, name: str):
         """send message from rename chat
         :param chat_id:
         :param name: Новый заголовок
@@ -313,7 +313,7 @@ class TamTam:
         return self._post_messages(data=data)
 
     # Добавление пользователей в чат
-    def add_members(self, chat_id, users_id: list):
+    def add_members(self, chat_id: int, users_id: list):
         x = [{'user_id': x} for x in users_id]
         data = {
             "recipient": {"chat_id": chat_id},
@@ -324,7 +324,7 @@ class TamTam:
         return self._post_messages(data=data)
 
     # Удаление пользователя из чата
-    def remove_member(self, chat_id, user_id):
+    def remove_member(self, chat_id: int, user_id: int):
         data = {
             "recipient": {"chat_id": chat_id},
             "chat_control": {
@@ -336,7 +336,7 @@ class TamTam:
 
     _me_id = None
 
-    def get_dialog_title(self, chat_id, chat=None):
+    def get_dialog_title(self, chat_id: int, chat=None):
         """Находим по сообщениям чей это персоналльный чат"""
         msgs = self.get_messages(chat_id)
         if not self._me_id:
@@ -349,7 +349,7 @@ class TamTam:
             return z[0], z[0]
         return chat_id, None
 
-    def set_icon_chat(self, chat_id, icon_url):
+    def set_icon_chat(self, chat_id: int, icon_url: str):
         """send icon from chat
         :param chat_id:
         :param icon_url: https://and.su/bots/icon128.png
@@ -367,7 +367,7 @@ class TamTam:
         }
         return self._post_messages(data=data)
 
-    def get_messages(self, chat_id):
+    def get_messages(self, chat_id: int):
         """
         Todo:from,to,count
         https://apiok.ru/dev/graph_api/methods/graph.user/graph.user.messages/get
@@ -466,7 +466,7 @@ class TamTam:
         zz = self._get(url='me/messages', params={'chat_id': chat_id})
         return zz['messages']
 
-    def get_messages_pers(self, user_id):
+    def get_messages_pers(self, user_id: int):
         """
         Список сообщений из личной беседы
         :param user_id:
